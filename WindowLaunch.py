@@ -3,7 +3,6 @@ import time
 import tkinter as tk
 
 
-
 class WindowLaunch:
     def __init__(self):
         self.window_manager = WindowManager()
@@ -33,10 +32,10 @@ class WindowLaunch:
         button1 = tk.Button(self.root, text="Launch saved window", command=self.Launch)
         button1.pack()
         
-        button2 = tk.Button(self.root, text="Save window", command=self.button2_action)
+        button2 = tk.Button(self.root, text="Save window (5 secs)", command=self.button2_action)
         button2.pack()
 
-        button3 = tk.Button(self.root, text="Present Window", command=self.SetupWindow)
+        button3 = tk.Button(self.root, text="Maximize Window", command=self.SetupWindow)
         button3.pack()
         
     
