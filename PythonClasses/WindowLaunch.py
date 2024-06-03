@@ -13,7 +13,7 @@ class WindowLaunch:
         self.IsMaximized = False
         self.root = tk.Tk()
         self.root.geometry("400x200")
-        self.ExePath = "Missing.exe"
+        self.ExePath = '"Missing.exe"'
         self.LoadFromFile = False
 
         try:
@@ -78,7 +78,7 @@ class WindowLaunch:
             self.IsMaximized = False
             print("Window is not maximized")
 
-        self.ExePath = self.window_manager.get_executable()
+        self.ExePath = '"'+ self.window_manager.get_executable() + '"'
         self.SaveToConfig()
         print("Window saved!")
         pass
@@ -86,7 +86,7 @@ class WindowLaunch:
     def SaveToConfig(self):
         # Save the window to a config file
         file = open("proc.conf", "w")
-        file.write(f"X={self.X}\nY={self.Y}\nSizeX={self.SizeX}\nSizeY={self.SizeY}\nIsMaximized={self.IsMaximized}\nExePath={self.ExePath}")
+        file.write(f'X={self.X}\nY={self.Y}\nSizeX={self.SizeX}\nSizeY={self.SizeY}\nIsMaximized={self.IsMaximized}\nExePath={self.ExePath}')
         file.close()
         print("Saved to proc.conf")
         pass
