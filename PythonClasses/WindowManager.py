@@ -25,11 +25,11 @@ class WindowManager:
         process_name = self.get_window_title()
         for proc in psutil.process_iter():
             for item in process_name.split(" ")[len(process_name.split(" "))-1].split("."):
-                if item in proc.name():
+                if item.lower() in proc.name().lower():
+                    print(proc.name())
                     pid = proc.pid
-                    break
+                    return pid
         return pid
-        
     
 
     def get_window_title(self):
