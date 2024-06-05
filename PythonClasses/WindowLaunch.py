@@ -45,7 +45,7 @@ class WindowLaunch:
         else:
             # Set dark theme
             self.root.tk.call("set_theme", "dark")
-
+        pass
 
 
     def loadFile(self):
@@ -56,14 +56,14 @@ class WindowLaunch:
         except:
             self.LoadFromFile = False
             print("No config file found")
-
+        pass
+    
    
     def create_text(self):
         #Adds text to under the buttons
         self.desc = ttk.Label(self.big_frame, text="Press the buttons to save or launch a window")
         self.desc.pack()
-
-
+        pass
 
         
 
