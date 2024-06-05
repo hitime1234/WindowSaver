@@ -1,6 +1,8 @@
 from WindowManager import WindowManager
 import time
 import tkinter as tk
+from tkinter import ttk
+
 
 
 class WindowLaunch:
@@ -12,10 +14,38 @@ class WindowLaunch:
         self.SizeY = 0
         self.IsMaximized = False
         self.root = tk.Tk()
-        self.root.geometry("400x200")
+        self.root.geometry("400x250")
+        self.root.title("Window Launch")
+        self.theme()
+        self.root.call("set_theme", "azure-dark")
+        self.change_theme()
         self.ExePath = '"Missing.exe"'
         self.LoadFromFile = False
         self.loadFile()
+
+
+        
+    def theme(self):
+            
+        # Pack a big frame so, it behaves like the window background
+        self.big_frame = ttk.Frame(self.root)
+        self.big_frame.pack(fill="both", expand=True)
+
+        # Set the initial theme
+        self.root.tk.call("source", "azure.tcl")
+        self.root.tk.call("set_theme", "light")
+
+        
+    
+    def change_theme(self):
+        # NOTE: The theme's real name is azure-<mode>
+        if self.root.tk.call("ttk::style", "theme", "use") == "azure-dark":
+        # Set light theme
+            self.root.tk.call("set_theme", "light")
+        else:
+            # Set dark theme
+            self.root.tk.call("set_theme", "dark")
+
 
 
     def loadFile(self):
@@ -28,18 +58,36 @@ class WindowLaunch:
             print("No config file found")
 
    
+    def create_text(self):
+        #Adds text to under the buttons
+        self.desc = ttk.Label(self.big_frame, text="Press the buttons to save or launch a window")
+        self.desc.pack()
+
+
+
+        
 
 
     def create_buttons(self):
         self.root.title("Window Launch")
-        button1 = tk.Button(self.root, text="Launch saved window", command=self.Launch)
+        
+        button1 = ttk.Button(self.big_frame, text='Launch saved window', style='Accent.TButton', command=self.Launch)
         button1.pack()
         
-        button2 = tk.Button(self.root, text="Save window (5 secs)", command=self.button2_action)
-        button2.pack()
+        padding = ttk.Label(self.big_frame, text="")
+        padding.pack()
 
-        button3 = tk.Button(self.root, text="Maximize Window", command=self.SetupWindow)
+        button1 = ttk.Button(self.big_frame, text='Save window (5 secs)', style='Accent.TButton', command=self.button2_action)
+        button1.pack()
+
+        padding = ttk.Label(self.big_frame, text="")
+        padding.pack()
+
+        button3 = ttk.Button(self.big_frame, text="Maximize Window", style='Accent.TButton', command=self.SetupWindow)
         button3.pack()
+
+        padding = ttk.Label(self.big_frame, text="")
+        padding.pack()
         
     
     def Launch(self):
@@ -118,10 +166,12 @@ class WindowLaunch:
     
     def mainloop(self):
         self.root.mainloop()
+        
 
 
 if __name__ == "__main__":
     window = WindowLaunch()
     window.create_buttons()
+    window.create_text()
     window.mainloop()
 
