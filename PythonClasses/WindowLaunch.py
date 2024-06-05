@@ -15,7 +15,10 @@ class WindowLaunch:
         self.root.geometry("400x200")
         self.ExePath = '"Missing.exe"'
         self.LoadFromFile = False
+        self.loadFile()
 
+
+    def loadFile(self):
         try:
             self.LoadFromConfig()
             self.LoadFromFile = True
@@ -41,15 +44,16 @@ class WindowLaunch:
     
     def Launch(self):
         # Launch window
+        self.loadFile()
         if self.LoadFromFile:
             self.window_manager.launch_process(self.ExePath)
             time.sleep(0.5)
             self.window_manager.set_active_window()
-            
             if self.IsMaximized:
                 self.window_manager.get_window().maximize()
                 print("Maximized window")
             else:
+                self.window_manager.get_window().minimize()
                 self.window_manager.move_window(self.X, self.Y)
                 self.window_manager.resize_window(self.SizeX, self.SizeY)
                 print("Resized window")
